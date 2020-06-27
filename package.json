@@ -1,5 +1,6 @@
 {
   "license": "MIT",
+  "main": "index.js",
   "scripts": {
     "indic": "node src",
     "funds": "node src --funds",
@@ -8,6 +9,8 @@
   "dependencies": {
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
-    "moment": "^2.27.0"
+    "discord.io": "^2.5.3",
+    "moment": "^2.27.0",
+    "table": "^5.4.6"
   }
 }
