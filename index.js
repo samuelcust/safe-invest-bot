@@ -1,9 +1,11 @@
+const { createServer } = require('./server')
 const Discord = require('discord.js')
 const client = new Discord.Client()
+const app = createServer(client)
 
 const asTable = require('as-table')
 
-const { sortFunds, sortBenjaminGrahamFilter } = require('./src/index.js')
+const { sortFunds, sortBenjaminGrahamFilter } = require('./src/index')
 
 const PREFIX = '!'
 
@@ -29,3 +31,7 @@ client.on('message', async message => {
 })
 
 client.login(process.env.TOKEN)
+
+app.listen(process.env.WEB_PORT, () => {
+  console.log(`Express server is listening on port ${process.env.WEB_PORT}`)
+})
