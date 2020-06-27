@@ -8,10 +8,10 @@
     "sync": "node src --sync"
   },
   "dependencies": {
+    "as-table": "^1.0.55",
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
-    "discord.io": "^2.5.3",
-    "moment": "^2.27.0",
-    "table": "^5.4.6"
+    "discord.js": "^12.2.0",
+    "moment": "^2.27.0"
   }
 }

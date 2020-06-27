@@ -1,36 +1,31 @@
-const Discord = require('discord.io')
-const { table } = require('table')
+const Discord = require('discord.js')
+const client = new Discord.Client()
 
-const { sortFunds, sortBenjaminGrahamFilter } = './src/index.js'
+const asTable = require('as-table')
+
+const { sortFunds, sortBenjaminGrahamFilter } = require('./src/index.js')
 
 const PREFIX = '!'
 
-const bot = new Discord.Client({
-    token: process.env.TOKEN,
-    autorun: true,
+client.on('ready', () => {
+    console.log('The BOT is ready')
 })
 
-bot.on('ready', function() {
-    console.log('Logged in as %s - %s\n', bot.username, bot.id)
-})
+client.on('message', async message => {
+    if(!message.content.startsWith(PREFIX)) return
 
-bot.on('message', function(user, userID, channelID, message, event) {
-    if(!message.startsWith(PREFIX)) return
-
-    const args = message.slice(PREFIX.length).trim().split(/ +/g)
+    const args = message.content.slice(PREFIX.length).trim().split(/ +/g)
     const command = args.shift().toLowerCase()
 
     if (command === 'funds') {
-        bot.sendMessage({
-            to: channelID,
-            message: table(sortFunds()),
-        })
+        const data = await sortFunds()
+        message.reply(asTable(data))
     }
 
     if (command === 'indic') {
-        bot.sendMessage({
-            to: channelID,
-            message: table(sortBenjaminGrahamFilter()),
-        })
+        const data = await sortBenjaminGrahamFilter()
+        message.reply(asTable(data))
     }
 })
+
+client.login(process.env.TOKEN)
