@@ -1,7 +1,7 @@
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/mazinsw/safeinvest)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/samuelcust/safe-invest-bot)
 
-# Safe Invest
-Mostra ações com dados estatísticos e ordenado por relevância para análise
+# Safe Invest Bot
+Um BOT para o Discord que mostra ações com dados estatísticos e ordenado por relevância para análise.
 
 ## O que você terá para análise:
 

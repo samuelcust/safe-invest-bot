@@ -134,14 +134,14 @@ const sortBenjaminGrahamFilter = async () => {
         { campo: 'liquidez_corrent', ordem: 'desc' }
     ]
     const results = sortFields(filtered, ordenar)
-    console.table(results.map(({ papel, liquidez_corrent, PL, LPA, dividendos }) => ({
+    return results.map(({ papel, liquidez_corrent, PL, LPA, dividendos }) => ({
         '1. Papel': papel,
         '2. Dividendos': dividendos.toLocaleString('pt-BR') + '%',
         '3. P/L': PL.toLocaleString('pt-BR') + ' anos',
         '4. Liquidês': liquidez_corrent.toLocaleString('pt-BR'),
         '5. LPA': formatCurr(LPA),
         '6. Cotação': formatCurr(PL * LPA),
-    })))
+    }))
 }
 
 const sortFunds = async () => {
@@ -190,7 +190,7 @@ const sortFunds = async () => {
         { campo: 'magicNumber', ordem: 'asc' }
     ]
     const results = sortFields(filtered, ordenar)
-    console.table(results.map(({ fundSymbol, value, ROI, variance, magicNumber, price, min52w, max52w, patrimony }) => ({
+    return results.map(({ fundSymbol, value, ROI, variance, magicNumber, price, min52w, max52w, patrimony }) => ({
         '1. Fundo': fundSymbol,
         '2. Dividendos': formatCurr(value),
         '3. ROI': ROI.toLocaleString('pt-BR') + '%',
@@ -200,7 +200,7 @@ const sortFunds = async () => {
         '7. P/VP': (price / patrimony).toLocaleString('pt-BR'),
         '8. Mínimo (52 sem)': formatCurr(min52w),
         '9. Máximo (52 sem)': formatCurr(max52w),
-    })))
+    }))
 }
 
 const args = process.argv.slice(2)
