@@ -111,8 +111,7 @@ const syncronizeFunds = async () => {
     }
 }
 
-const sortBenjaminGrahamFilter = async () => {
-
+const sortBenjaminGrahamFilter = async (limit = 10) => {
     const filtered = indicadores.filter(({ liquidez_corrent, PL, LPA, dividendos }) => {
         if (!(liquidez_corrent > 1.5)) {
             return false
@@ -134,7 +133,7 @@ const sortBenjaminGrahamFilter = async () => {
         { campo: 'liquidez_corrent', ordem: 'desc' }
     ]
     const results = sortFields(filtered, ordenar)
-    return results.map(({ papel, liquidez_corrent, PL, LPA, dividendos }) => ({
+    return results.slice(0, limit).map(({ papel, liquidez_corrent, PL, LPA, dividendos }) => ({
         '1. Papel': papel,
         '2. Dividendos': dividendos.toLocaleString('pt-BR') + '%',
         '3. P/L': PL.toLocaleString('pt-BR') + ' anos',
@@ -144,8 +143,7 @@ const sortBenjaminGrahamFilter = async () => {
     }))
 }
 
-const sortFunds = async () => {
-
+const sortFunds = async (limit = 10) => {
     const calcVariance = list => {
         const values = list.map(a => a.dividend)
         const avg = values.reduce((r, v) => r + v, 0) / (values.length || 1)
@@ -190,7 +188,7 @@ const sortFunds = async () => {
         { campo: 'magicNumber', ordem: 'asc' }
     ]
     const results = sortFields(filtered, ordenar)
-    return results.map(({ fundSymbol, value, ROI, variance, magicNumber, price, min52w, max52w, patrimony }) => ({
+    return results.slice(0, limit).map(({ fundSymbol, value, ROI, variance, magicNumber, price, min52w, max52w, patrimony }) => ({
         '1. Fundo': fundSymbol,
         '2. Dividendos': formatCurr(value),
         '3. ROI': ROI.toLocaleString('pt-BR') + '%',
@@ -211,4 +209,9 @@ if (args.includes('--sync')) {
     sortFunds()
 } else {
     sortBenjaminGrahamFilter()
+}
+
+module.exports = {
+    sortFunds,
+    sortBenjaminGrahamFilter,
 }
