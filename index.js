@@ -32,6 +32,6 @@ client.on('message', async message => {
 
 client.login(process.env.TOKEN)
 
-app.listen(process.env.WEB_PORT, () => {
-  console.log(`Express server is listening on port ${process.env.WEB_PORT}`)
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Express server is listening on port ${process.env.PORT || 3000}`)
 })
